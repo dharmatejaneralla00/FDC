@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FDC</title>
+  <!-- Font Awesome for Logout Icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      padding:0
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #ffffff;
+      color: #333;
+      padding: 10px 20px;
+      border-bottom: 1px solid #ddd;
+      flex-wrap: wrap;
+    }
+
+    .navbar .brand {
+      font-size: 20px;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+
+    .navbar .user-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .username {
+      font-weight: 500;
+      color: #2c3e50;
+    }
+
+    .logout-icon {
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: #2c3e50;
+      font-size: 18px;
+    }
+
+    .logout-icon:hover {
+      color: #ff4d4d;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .user-info {
+        margin-top: 10px;
+        width: 100%;
+        justify-content: space-between;
+      }
+    }
+    .container {
+      max-width: 900px;
+      margin: 10px auto 20px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    }
+
+    .container h2 {
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    .form-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    .form-group input {
+      flex: 1;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .form-group button,  .button{
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .form-group button:hover, .button:hover {
+      background-color: #0056b3;
+    }
+
+    .awb-details {
+      max-width: 900px;
+      margin: 0 auto;
+<!--      width:70%;-->
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .awb-details h3 {
+      margin-top: 0;
+      color: #444;
+    }
+
+    .awb-details p {
+      color: #555;
+    }
+    .table-container {
+      max-width: 1000px;
+      margin: auto;
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    h2 {
+      text-align: center;
+      color: #1e3a8a;
+      margin-bottom: 20px;
+    }
+
+    .details-grid {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .section {
+      flex: 1;
+      min-width: 300px;
+      background-color: #f9fbfe;
+      border-radius: 8px;
+      padding: 15px;
+      border: 1px solid #dce3ec;
+    }
+
+    .section h3 {
+      color: #1d4ed8;
+      border-bottom: 1px solid #dce3ec;
+      padding-bottom: 6px;
+      margin-bottom: 12px;
+    }
+
+    .section table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .section th, .section td {
+      text-align: left;
+      padding: 10px 12px;
+    }
+
+    .section th {
+      background-color: #e0edff;
+      color: #374151;
+      width: 40%;
+      border-radius: 6px 0 0 6px;
+    }
+
+    .section td {
+      background-color: #f5faff;
+      color: #1f2937;
+      border-radius: 0 6px 6px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid #d1d5db;
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #e0edff;
+      color: #1e3a8a;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9fbfe;
+    }
+ .table-container {
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    h2 {
+      text-align: center;
+      color: #1e3a8a;
+      margin-bottom: 20px;
+    }
+    a
+    {
+    text-decoration:none;
+    float:right;
+    }
+     .modal {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.4);
+    }
+
+    .modal-content {
+      background-color: white;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .modal-content h3 {
+      margin-top: 0;
+      color: #1e3a8a;
+    }
+
+    .modal-content label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+
+    .modal-content input, .modal-content select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .modal-content button {
+      background-color: #2563eb;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .close {
+      float: right;
+      font-size: 20px;
+      font-weight: bold;
+      color: #999;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="brand">FDC Courier & Cargo</div>
+      <a href="/login" class="button">Login</a>
+  </nav>
+<div class="container">
+    <h2>Track Your Shipment </h2>
+    <form method="POST" action="/track/">
+        {% csrf_token %}
+      <div class="form-group">
+        <input type="text" name="awb_no" placeholder="Enter AWB Number" required />
+        <button type="submit">Search</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- AWB Details Container -->
+  <div class="awb-details">
+    <h3>AWB Details </h3>
+    {% if status == 'home' %}
+    <p>Please enter an AWB number and press Search to view details.</p>
+    {% else %}
+    <div class="details-grid">
+    {% for data in book %}
+    <!-- Sender Section -->
+    <div class="section">
+      <h3>Sender</h3>
+      <table>
+        <tr><th>Name</th><td>{{ data.sender_name }}</td></tr>
+        <tr><th>Phone</th><td>{{ data.sender_phone }}</td></tr>
+        <tr><th>Address</th><td>{{ data.sender_address }}</td></tr>
+        <tr><th>Station</th><td>{{ data.sender_station }}</td></tr>
+      </table>
+    </div>
+
+    <!-- Receiver Section -->
+    <div class="section">
+      <h3>Receiver</h3>
+      <table>
+        <tr><th>Name</th><td>{{ data.reciever_name }}</td></tr>
+        <tr><th>Phone</th><td>{{ data.reciever_phone }}</td></tr>
+        <tr><th>Address</th><td>{{ data.reciever_address }}</td></tr>
+        <tr><th>Station</th><td>{{ data.reciever_station }}</td></tr>
+      </table>
+    </div>
+    {% endfor %}
+  </div>
+<div class="table-container" style="margin-top:20px;">
+  <h2>Transit Activity </h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Station</th>
+        <th>Activity</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for activity in trans %}
+      <tr>
+        <td>{{ activity.date }}</td>
+        <td>{{ activity.station }}</td>
+        <td>{{ activity.activitylist }}</td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="3">No transit activity available.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+    {% endif %}
+
+    <div id="activityModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h3>Add Transit Activity</h3>
+    <form method="POST" action="/add-activity/">
+      {% csrf_token %}
+      <label for="date">Date</label>
+      <input type="date" id="date" name="date" required>
+      <input value={{awbno}} hidden name="awbno">
+      <label for="station">Station</label>
+      <select id="station" name="station" required>
+        <option value="">Select Station</option>
+        {% for i in dest %}
+        <option value={{i.name}}>{{i.name}}</option>
+        {% endfor %}
+      </select>
+      <label for="activity">Activity</label>
+      <select id="activity" name="activity" required>
+        <option value="">Select Activity</option>
+        <option value="Booked">Booked</option>
+        <option value="Shipped">Shipped</option>
+        <option value="Received">Received</option>
+        <option value="In Transit">In Transit</option>
+        <option value="Arrived at Destination">Arrived at Destination</option>
+        <option value="Out for Delivery">Out for Delivery</option>
+        <option value="Delivered">Delivered</option>
+      </select>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+  </div>
+
+</body>
+</html>
