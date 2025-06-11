@@ -70,11 +70,13 @@ def AddShipment(r):
         sender_address = r.POST['sender_address']
         sender_station = r.POST['sender_station']
         awbno = r.POST['awbno']
+        pcs = r.POST['pcs']
+        wt = r.POST['wt']
         models.BookingData.objects.create(sender_name=sender_name, sender_address=sender_address,
                                           sender_station=sender_station, sender_phone=sender_phone,
                                           reciever_name=reciever_name, reciever_phone=reciever_phone,
                                           reciever_station=reciever_station, reciever_address=reciever_address,
-                                          awbno=awbno)
+                                          awbno=awbno,pcs=pcs,wt=wt)
         models.TransitDetails.objects.create(date=datetime.date.today(), station=sender_station, activitylist='Booked',
                                              awbno=awbno)
         messages.success(r, "Added Successfully")

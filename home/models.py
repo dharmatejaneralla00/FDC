@@ -12,7 +12,9 @@ class BookingData(models.Model):
     reciever_phone = models.CharField(max_length=20)
     reciever_address = models.CharField(max_length=20)
     reciever_station = models.CharField(max_length=20)
-    awbno=models.CharField(max_length=20)
+    awbno = models.CharField(max_length=20)
+    pcs = models.CharField(max_length=5)
+    wt = models.CharField(max_length=5)
 
 
 class TransitDetails(models.Model):
