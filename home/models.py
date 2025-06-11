@@ -6,11 +6,11 @@ from django.db import models
 class BookingData(models.Model):
     sender_name = models.CharField(max_length=20)
     sender_phone = models.CharField(max_length=20)
-    sender_address = models.CharField(max_length=20)
+    sender_address = models.TextField()
     sender_station = models.CharField(max_length=20)
     reciever_name = models.CharField(max_length=20)
     reciever_phone = models.CharField(max_length=20)
-    reciever_address = models.CharField(max_length=20)
+    reciever_address = models.TextField()
     reciever_station = models.CharField(max_length=20)
     awbno = models.CharField(max_length=20)
     pcs = models.CharField(max_length=5)
