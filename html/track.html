@@ -305,7 +305,7 @@
 
   <!-- AWB Details Container -->
   <div class="awb-details">
-    <h3>AWB Details </h3>
+    <h3>AWB Details : {{ awbno }} </h3>
     {% if status == 'home' %}
     <p>Please enter an AWB number and press Search to view details.</p>
     {% else %}
@@ -319,6 +319,8 @@
         <tr><th>Phone</th><td>{{ data.sender_phone }}</td></tr>
         <tr><th>Address</th><td>{{ data.sender_address }}</td></tr>
         <tr><th>Station</th><td>{{ data.sender_station }}</td></tr>
+        <tr><th>Pieces</th><td>{{ data.pcs }}</td></tr>
+        <tr><th>Weight(kg)</th><td>{{ data.wt }}</td></tr>
       </table>
     </div>
 
