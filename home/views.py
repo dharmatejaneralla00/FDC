@@ -4,7 +4,7 @@ from http.client import HTTPResponse
 from django.contrib import auth, messages
 from django.contrib.auth import logout
 from django.shortcuts import render, redirect
-from rest_framework.response import Response
+
 
 from . import models
 
