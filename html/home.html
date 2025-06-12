@@ -31,7 +31,11 @@
       font-weight: bold;
       color: #2c3e50;
     }
+  .navbar .brand a
+  {
+      color: #2c3e50;
 
+  }
     .navbar .user-info {
       display: flex;
       align-items: center;
@@ -111,13 +115,16 @@
     }
 
     .awb-details {
-      max-width: 900px;
+      max-width: 90%;
       margin: 0 auto;
 <!--      width:70%;-->
       background: #fff;
       padding: 20px;
+      margin:20px
       border-radius: 10px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      display:flex;
+      flex-direction:row;
     }
 
     .awb-details h3 {
@@ -145,13 +152,13 @@
 
     .details-grid {
       display: flex;
-      gap: 30px;
+      gap: 10px;
       flex-wrap: wrap;
     }
 
     .section {
       flex: 1;
-      min-width: 300px;
+      min-width: 200px;
       background-color: #f9fbfe;
       border-radius: 8px;
       padding: 15px;
@@ -214,6 +221,7 @@
       padding: 20px;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      flex:1;
     }
 
     h2 {
@@ -285,11 +293,30 @@
     .close:hover {
       color: #000;
     }
+    .data
+    {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    width:100%;
+    }
+    .details
+    {
+    display:flex;
+margin:20px;
+padding:20px;
+flex-direction:column;
+flex:1;
+background:#fff;
+align-items:center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+border-radius:6px;
+    }
   </style>
 </head>
 <body>
   <nav class="navbar">
-    <div class="brand">FDC Courier & Cargo</div>
+    <div class="brand"><a href="/">FDC Courier & Cargo</a></div>
     <div class="user-info">
       <span class="username">{{user.first_name}}</span>
       <button class="logout-icon" onclick="logout()" title="Logout">
@@ -308,8 +335,10 @@
   </div>
 
   <!-- AWB Details Container -->
+
   <div class="awb-details">
-    <h3>AWB Details  {% if status == 'track' %} : {{ awbno }} <a class="button" href=""> Edit </a> {% endif %}</h3>
+    <div class="details">
+    <h3>AWB Details   {% if status == 'track' %} : {{ awbno }}</h3> <div class="data table-container"  style="padding:4px;margin-bottom:4px" > <p>Date: {{date}}</p> <p>Pieces: {{pcs}}</p> <p>Weight(kg): {{wt}}</p>  <a class="button" href=""> Edit </a> </div>{% endif %}
     {% if status == 'home' %}
     <p>Please enter an AWB number and press Search to view details.</p>
     {% else %}
@@ -323,8 +352,7 @@
         <tr><th>Phone</th><td>{{ data.sender_phone }}</td></tr>
         <tr><th>Address</th><td>{{ data.sender_address }}</td></tr>
         <tr><th>Station</th><td>{{ data.sender_station }}</td></tr>
-        <tr><th>Pieces</th><td>{{ data.pcs }}</td></tr>
-        <tr><th>Weight(kg)</th><td>{{ data.wt }}</td></tr>
+
       </table>
     </div>
 
@@ -340,6 +368,8 @@
     </div>
     {% endfor %}
   </div>
+    </div>
+
 <div class="table-container" style="margin-top:20px;">
   <h2>Transit Activity <button style="float:right;" class="button" onclick="openModal()">Add Activity</button> </h2>
   <table>

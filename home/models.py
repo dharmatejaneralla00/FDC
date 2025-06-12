@@ -15,6 +15,7 @@ class BookingData(models.Model):
     awbno = models.CharField(max_length=20)
     pcs = models.CharField(max_length=5)
     wt = models.CharField(max_length=5)
+    date = models.DateField()
 
 
 class TransitDetails(models.Model):

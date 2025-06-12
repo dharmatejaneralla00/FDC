@@ -5,7 +5,6 @@ from django.contrib import auth, messages
 from django.contrib.auth import logout
 from django.shortcuts import render, redirect
 
-
 from . import models
 
 
@@ -40,8 +39,14 @@ def TrackAWB(r):
     awbno = r.GET['awb_no']
     bookingdata = models.BookingData.objects.filter(awbno=awbno)
     transitdata = models.TransitDetails.objects.filter(awbno=awbno)
-    return render(r, 'home.html', context={"book": bookingdata, 'trans': transitdata, 'status': 'track', 'awbno': awbno,
-                                           'dest': models.Destinations.objects.all()})
+    if bookingdata:
+        return render(r, 'home.html',
+                      context={"book": bookingdata, 'trans': transitdata, 'status': 'track', 'awbno': awbno,
+                               'dest': models.Destinations.objects.all(), 'pcs': bookingdata[0].pcs,
+                               'wt': bookingdata[0].wt, 'date': bookingdata[0].date})
+    else:
+        messages.error(r, 'No Data Found')
+        return redirect('/')
 
 
 def AddActivity(r):
@@ -72,11 +77,12 @@ def AddShipment(r):
         awbno = r.POST['awbno']
         pcs = r.POST['pcs']
         wt = r.POST['wt']
+        date = r.POST['date']
         models.BookingData.objects.create(sender_name=sender_name, sender_address=sender_address,
                                           sender_station=sender_station, sender_phone=sender_phone,
                                           reciever_name=reciever_name, reciever_phone=reciever_phone,
                                           reciever_station=reciever_station, reciever_address=reciever_address,
-                                          awbno=awbno,pcs=pcs,wt=wt)
+                                          awbno=awbno, pcs=pcs, wt=wt, date=date)
         models.TransitDetails.objects.create(date=datetime.date.today(), station=sender_station, activitylist='Booked',
                                              awbno=awbno)
         messages.success(r, "Added Successfully")
@@ -89,7 +95,12 @@ def track(r):
         awbno = r.POST['awb_no']
         bookingdata = models.BookingData.objects.filter(awbno=awbno)
         transitdata = models.TransitDetails.objects.filter(awbno=awbno)
-        return render(r, 'track.html',
-                      context={"book": bookingdata, 'trans': transitdata, 'status': 'track', 'awbno': awbno,
-                               'dest': models.Destinations.objects.all()})
+        if bookingdata:
+            return render(r, 'track.html',
+                          context={"book": bookingdata, 'trans': transitdata, 'status': 'track', 'awbno': awbno,
+                                   'dest': models.Destinations.objects.all(), 'pcs': bookingdata[0].pcs,
+                                   'wt': bookingdata[0].wt, 'date': bookingdata[0].date})
+        else:
+            messages.error(r, 'No Data Found')
+
     return render(r, 'track.html', {'status': "home"})

@@ -14,6 +14,104 @@
       background-color: #f9f9f9;
       padding:0
     }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #1d4ed8;
+      margin-bottom: 30px;
+    }
+
+    .form-section {
+      background: #f9fafb;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding-right:20px;
+    }
+
+    .form-section h3 {
+      margin-top: 0;
+      color: #2563eb;
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #334155;
+    }
+
+    input, textarea,select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #cbd5e1;
+      border-radius: 5px;
+    }
+
+    .row {
+      display: flex;
+      gap: 30px;
+      flex-wrap: no-wrap;
+    }
+
+    .col {
+      flex: 1 1 45%;
+      gap:10px;
+
+    }
+
+    button {
+      display: block;
+      margin: 20px auto 0;
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1e3a8a;
+      color:white;
+    }
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      font-size: 16px;
+      padding: 8px 12px;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      color: #007bff;
+      font-family: sans-serif;
+    }
+    .arrow {
+      margin-left: 6px;
+      font-size: 18px;
+    }
+.navbar .brand a
+  {
+      color: #2c3e50;
+
+  }
+  a
+  {
+  text-decoration:none;
+  }
     .navbar {
       display: flex;
       justify-content: space-between;
@@ -23,6 +121,7 @@
       padding: 10px 20px;
       border-bottom: 1px solid #ddd;
       flex-wrap: wrap;
+      height:40px;
     }
 
     .navbar .brand {
@@ -68,100 +167,11 @@
       }
     }
 
-    .container {
-      max-width: 900px;
-      margin: auto;
-      background: #fff;
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-    h2 {
-      text-align: center;
-      color: #1d4ed8;
-      margin-bottom: 30px;
-    }
-
-    .form-section {
-      background: #f9fafb;
-      padding: 20px;
-      margin-bottom: 30px;
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      padding-right:20px;
-    }
-
-    .form-section h3 {
-      margin-top: 0;
-      color: #2563eb;
-      margin-bottom: 15px;
-    }
-
-    label {
-      display: block;
-      margin-top: 15px;
-      font-weight: bold;
-      color: #334155;
-    }
-
-    input, textarea,select {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border: 1px solid #cbd5e1;
-      border-radius: 5px;
-    }
-
-    .row {
-      display: flex;
-      gap: 30px;
-      flex-wrap: wrap;
-    }
-
-    .col {
-      flex: 1 1 45%;
-      gap:10px;
-
-    }
-
-    button {
-      display: block;
-      margin: 20px auto 0;
-      background: #2563eb;
-      color: white;
-      border: none;
-      padding: 12px 25px;
-      border-radius: 6px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #1e3a8a;
-      color:white;
-    }
-    .back-button {
-      display: inline-flex;
-      align-items: center;
-      font-size: 16px;
-      padding: 8px 12px;
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-      color: #007bff;
-      font-family: sans-serif;
-    }
-    .arrow {
-      margin-left: 6px;
-      font-size: 18px;
-    }
-
   </style>
 </head>
 <body>
  <nav class="navbar">
-    <div class="brand">FDC Courier & Cargo</div>
+     <div class="brand"><a href="/">FDC Courier & Cargo</a></div>
     <div class="user-info">
       <span class="username">{{user.first_name}}</span>
       <p class="logout-icon" onclick="logout()" title="Logout">
@@ -170,19 +180,35 @@
     </div>
   </nav>
   <div class="container" style="margin-top:20px;">
-<button class="back-button" onclick="history.back()">
+
+      <div>
+          <h2> <button class="back-button" onclick="history.back()" style="float:left;">
  <span class="arrow">←</span> Back
-</button>
-    <h2>Create New Shipment</h2>
+</button>Create New Shipment</h2></div>
     <form action="/add-shipment/" method="post">
 {% csrf_token %}
       <!-- AWB Section -->
       <div class="form-section">
         <h3>AWB Details</h3>
-        <label for="awb_no">AWB Number</label>
-        <input type="number" id="awb_no" name="awbno" required>
+          <div class="row">
+               <div class="col">
+                  <label for="date">Date</label>
+                   <input type="date" id="date" name="date" required>
+              </div>
+              <div class="col">
+                  <label for="awb_no">AWB Number</label>
+                  <input type="number" id="awb_no" name="awbno" required>
+              </div>
+              <div class="col">
+                <label for="pcs">Pcs</label>
+                <input type="number" id="pcs" name="pcs" required  >
+            </div>
+            <div class="col">
+                <label for="wt">Wt(kg)</label>
+                <input type="number" id="wt" name="wt" required  >
+            </div>
+          </div>
       </div>
-
       <!-- Sender Section -->
       <div class="form-section">
         <h3>Sender Details</h3>
@@ -195,26 +221,25 @@
             <label for="sender_phone">Phone</label>
             <input type="number" id="sender_phone" name="sender_phone" required  >
           </div>
-              <div class="col">
-            <label for="pcs">Pcs</label>
-            <input type="number" id="pcs" name="pcs" required  >
-          </div>
-              <div class="col">
-            <label for="wt">Wt(kg)</label>
-            <input type="number" id="wt" name="wt" required  >
-          </div>
-        </div>
-        <label for="sender_address">Address</label>
+            <div class="col">
+                   <label for="sender_address">Address</label>
         <textarea id="sender_address" name="sender_address" required></textarea>
-        <label for="sender_station">Station</label>
+              </div>
+ <div class="col">
+                   <label for="sender_station">Station</label>
         <select id="sender_station" name="sender_station" required>
         <option value="">Select Station</option>
         {% for i in dest %}
         <option value={{i.name}}>{{i.name}}</option>
         {% endfor %}
       </select>
-      </div>
+              </div>
+        </div>
+          <div class="row">
 
+
+          </div>
+      </div>
       <!-- Receiver Section -->
       <div class="form-section">
         <h3>Receiver Details</h3>
@@ -227,16 +252,25 @@
             <label for="reciever_phone">Phone</label>
             <input type="number" id="reciever_phone" name="reciever_phone" required>
           </div>
-        </div>
-        <label for="reciever_address">Address</label>
+            <div class="col">
+                   <label for="reciever_address">Address</label>
         <textarea id="reciever_address" name="reciever_address" required></textarea>
-        <label for="reciever_station">Station</label>
+              </div>
+              <div class="col">
+                   <label for="reciever_station">Station</label>
         <select id="reciever_station" name="reciever_station" required>
         <option value="">Select Station</option>
         {% for i in dest %}
         <option value={{i.name}}>{{i.name}}</option>
         {% endfor %}
       </select>
+              </div>
+        </div>
+          <div class="row">
+
+          </div>
+
+
       </div>
 
       <button type="submit">Submit Shipment</button>
