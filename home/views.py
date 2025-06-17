@@ -83,7 +83,7 @@ def AddShipment(r):
                                           reciever_name=reciever_name, reciever_phone=reciever_phone,
                                           reciever_station=reciever_station, reciever_address=reciever_address,
                                           awbno=awbno, pcs=pcs, wt=wt, date=date)
-        models.TransitDetails.objects.create(date=datetime.date.today(), station=sender_station, activitylist='Booked',
+        models.TransitDetails.objects.create(date=date, station=sender_station, activitylist='Booked',
                                              awbno=awbno)
         messages.success(r, "Added Successfully")
         return redirect('/')
